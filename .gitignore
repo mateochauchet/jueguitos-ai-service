@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+venv/
+.env/
+
+# Logs and artifacts
+*.log
+*.tmp
+*.out
+
+# IDEs
+.vscode/
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Videos procesados (puede ser temporal o configurable)
+*.mp4
+*.avi
+*.mov
+
+# Model weights
+models/*.pt

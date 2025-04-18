@@ -1,0 +1,22 @@
+# Web API
+fastapi
+uvicorn[standard]
+pydantic
+
+# Visión por computadora
+opencv-python
+ultralytics
+numpy
+
+# Overlay de video (opcional)
+moviepy
+ffmpeg-python
+
+# Otros
+python-multipart  # Para recibir archivos en FastAPI
+
+# Desarrollo
+black
+flake8
+mypy
+pytest
