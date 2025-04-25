@@ -1,27 +1,32 @@
 from ultralytics import YOLO
 import cv2
 
-class BallDetector:
-    def __init__(self, model_path="yolov8n.pt"):
+class HumanDetector:
+    def __init__(self, model_path="yolov8n-seg.pt"):
         self.model = YOLO(model_path)
 
-    def detect_ball(self, frame):
+    def detect_human(self, frame):
         results = self.model(frame)[0]
+        
+        if results.masks is not None:
+            masks = results.masks.data  # tensor: [N, H, W]
+        
         detections = []
 
-        for result in results.boxes:
+        for i, result in enumerate(results.boxes):
             class_id = int(result.cls[0])
             conf = float(result.conf[0])
             label = self.model.names[class_id]
             box = result.xyxy[0].tolist()  # [x1, y1, x2, y2]
 
-            # El ID 32 en COCO es pelota de fútbol
-            if class_id == 32 and conf > 0.1:
+            # El ID 0 en COCO es persona
+            if class_id == 0 and conf > 0.5:
                 detections.append({
                     "box": box,
                     "label": label,
                     "confidence": conf,
-                    "class_id": class_id
+                    "class_id": class_id,
+                    "mask": results.masks.data[i].cpu().numpy()
                 })
-
         return detections
+
